@@ -133,7 +133,7 @@ public class About extends Activity {
 	public void descargar(View v){
         /*
         Para llamar el proceso de descarga de archivo, se le asigna en este caso la función "descarga" a algún botón.
-        La función recibe como descarga el URL del archivo que se desea descargar.
+        El objeto recibe como entrada el URL del archivo que se desea descargar.
         En este caso, el URL que se envia tiene la siguiente forma:
             String URL="https://raw.githubusercontent.com/LabExperimental-SIUA/osmtracker-android/layouts/layouts/transporte_publico_es.xml";
         */
