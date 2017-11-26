@@ -13,6 +13,8 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import me.guillaumin.android.osmtracker.OSMTracker;
+
 /**
  * Created by brandon on 23/11/17.
  */
@@ -28,8 +30,8 @@ public class DownloadTask {
 
         this.downloadUrl = downloadUrl;
 
-
-        downloadFileName = downloadUrl.substring(downloadUrl.lastIndexOf( '/' ),downloadUrl.length());//Create file name by picking download file name from URL
+        // Create file name by picking download file name from URL
+        downloadFileName = downloadUrl.substring(downloadUrl.lastIndexOf( '/' ) +1 ,downloadUrl.length());
         Log.e(TAG, downloadFileName);
 
         //Start Downloading Task
@@ -65,6 +67,8 @@ public class DownloadTask {
                     }, 3000);
 
                     Log.e(TAG, "Download Failed");
+                    progressDialog.dismiss();
+                    Toast.makeText(context, "Download Failed", Toast.LENGTH_SHORT).show();
 
                 }
             } catch (Exception e) {
@@ -105,14 +109,14 @@ public class DownloadTask {
                 if (new CheckForSDCard().isSDCardPresent()) {
 
                     apkStorage = new File(
-                            Environment.getExternalStorageDirectory() + "/"
-                                    + "osmtracker/layouts");
+                            Environment.getExternalStorageDirectory() + OSMTracker.Preferences.VAL_STORAGE_DIR
+                                    + File.separator + Preferences.LAYOUTS_SUBDIR);
                 } else
                     Toast.makeText(context, "Oops!! There is no SD Card.", Toast.LENGTH_SHORT).show();
 
                 //If File is not present create directory
                 if (!apkStorage.exists()) {
-                    apkStorage.mkdir();
+                    apkStorage.mkdirs();
                     Log.e(TAG, "Directory Created.");
                 }
 
