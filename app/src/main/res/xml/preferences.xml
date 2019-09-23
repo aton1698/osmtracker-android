@@ -42,6 +42,7 @@
 			android:summary="@string/prefs_gps_logging_min_distance_summary"
 			android:defaultValue="0"
 			android:inputType="number" />
+
 	</PreferenceCategory>
 	
 	<PreferenceCategory android:title="@string/prefs_output">

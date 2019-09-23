@@ -215,6 +215,7 @@ public class TrackManager extends ListActivity {
 		switch (item.getItemId()) {
 		case R.id.trackmgr_menu_newtrack:
 			startTrackLoggerForNewTrack();
+
 			break;
 		case R.id.trackmgr_menu_continuetrack:
 			Intent i = new Intent(this, TrackLogger.class);
@@ -265,6 +266,25 @@ public class TrackManager extends ListActivity {
 			break;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	/**
+	 * This method prepare the new track and set an id, then start a new TrackLogger with the new track id
+	 */
+	private void startTrackLogger(){
+		// Start track logger activity
+		try {
+			Intent i = new Intent(this, TrackLogger.class);
+			// New track
+			currentTrackId = createNewTrack();
+			i.putExtra(TrackContentProvider.Schema.COL_TRACK_ID, currentTrackId);
+			startActivity(i);
+		} catch (CreateTrackException cte) {
+			Toast.makeText(this,
+					getResources().getString(R.string.trackmgr_newtrack_error).replace("{0}", cte.getMessage()),
+					Toast.LENGTH_LONG)
+					.show();
+		}
 	}
 
 
